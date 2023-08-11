@@ -6,10 +6,10 @@ Esercizi e le consegne per i progetti di laboratorio di Algoritmi e Strutture Da
 ------------
 
 ## Elenco esercizi
-- Esercizio 12 - periodo frazionario
-- Esercizio 18 - verifica di alberi binari di ricerca
-- Esercizio 22 - alberi binari di ricerca
-- Esercizio 25 - distanza di editingVirtual programming lab
+- [x] Esercizio 12 - periodo frazionario
+- [ ] Esercizio 18 - verifica di alberi binari di ricerca
+- [ ] Esercizio 22 - alberi binari di ricerca
+- [ ] Esercizio 25 - distanza di editingVirtual programming lab
 
 ## Progetto di laboratorio (periodo frazionario)
 
@@ -23,3 +23,5 @@ Si richiede di implementare inoltre un programma per la misurazione dei tempi me
 
 ## Branch
 own_branch -> pre -> master
+- **pre**: contiene anche errori
+- **master**: non contiene errori (si spera)
