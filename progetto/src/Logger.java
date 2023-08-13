@@ -29,7 +29,7 @@ import java.util.Date;
 public class Logger {
 
     public static final String filename = "./progetto/results.csv";
-    public static final String colnames = "Timestamp,Run,Algorithm.Type,String.Length,Duration";
+    public static final String colnames = "Timestamp,Run,Algorithm.Type,String.Length,Duration,Estimated.Duration";
 
     // inizializza il file: creazione + colonne
     public static void initializeFile() {
@@ -50,12 +50,12 @@ public class Logger {
     }
 
     // crea stringa di log
-    public static void logPerformanceString(long run, String Algorithm, long stringlength, long duration) {
+    public static void logPerformanceString(long run, String algorithm, long stringlength, long duration, long estimatedduration) {
 
         String logline= "";
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
 
-        logline= timeStamp +","+ run+","+Algorithm+","+stringlength+","+duration;
+        logline= timeStamp +","+ run+","+algorithm+","+stringlength+","+duration+","+estimatedduration;
         writeLine(logline);
     }
 

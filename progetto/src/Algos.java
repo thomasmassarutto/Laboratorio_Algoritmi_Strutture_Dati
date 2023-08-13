@@ -27,7 +27,7 @@ public class Algos {
 
         }
 
-        return 1;
+        return -1;
     }
 
     public static long periodSmart(String stringa) {
