@@ -1,0 +1,40 @@
+abcabcabc				            3
+
+abcabcabca				            3
+
+abcabcabcab				            3
+
+abab					            2
+
+ab					                2
+
+abababa					            2
+
+abc					                3
+
+abca					            3
+
+aaa					                1
+
+a					                1
+
+aaaaaaaa				            1
+
+ababaaba				            5
+
+ababaababa				            5
+
+abcabcaabcabcaabc			        7
+
+abcabcaabcabcaabcabca			    7
+
+abcabcaabcabcaabcabcab			    17
+
+abcabcaabcabcaabcabcabc			    17
+
+ababaababaababaa			        5
+
+ababaababaababaaababaababaababa		16
+
+
+abbabaabbaababbabaababbaabbabaab	24
