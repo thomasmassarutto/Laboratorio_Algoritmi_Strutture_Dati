@@ -6,6 +6,7 @@
  * limite massimo: 9,223  secondi, (poco più di 2 ore)
  * tempo di eseguzione media di nanoTime(): circa 25 nanosecondi
  * 
+ * PUBBLICO:
  * void startChrono()   : comincia a cronometrare 
  * void endChrono()     : smette di cronometrare
  * long elapsedTime()   : calcola il tempo di eseguzione

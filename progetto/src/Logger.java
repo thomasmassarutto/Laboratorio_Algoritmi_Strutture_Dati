@@ -4,7 +4,7 @@
  * Questa classe serve a loggare i dati relativi al tempo di eseguzione del programma in un file csv denominato "results.csv".
  * 
  * PUBBLICO:
- * void initializeFile()            :crea un file denominato "results.csv"
+ * void initializeFile()            :crea un file denominato "results.csv" e inizializza l'intestazione delle colonne
  * void logPerformanceString(...)   :aggiunge una nuova riga al file contentete parametri utili per l'analisi delle performance
  *                      long run: numero della run
  *                      String Algorithm: tipo di algoritmo (PeriodNaive / PeriodSmart)
@@ -31,7 +31,7 @@ public class Logger {
     public static final String filename = "./progetto/results.csv";
     public static final String colnames = "Timestamp,Run,Algorithm.Type,String.Length,Duration";
 
-    // crea il file
+    // inizializza il file: creazione + colonne
     public static void initializeFile() {
 
         try {
@@ -49,6 +49,7 @@ public class Logger {
         writeColnames();
     }
 
+    // crea stringa di log
     public static void logPerformanceString(long run, String Algorithm, long stringlength, long duration) {
 
         String logline= "";
