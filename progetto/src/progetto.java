@@ -7,11 +7,13 @@ public class progetto {
 
         String s = StringGenerator.generateString();
 
-        int res= Algos.periodNaive(s);
-
-        System.out.println(res);
-
         System.out.println(Chrono.tMin());
-    
+        
+        Chrono.startChrono();
+        int res = Algos.periodNaive(s);
+        Chrono.endChrono();
+
+        System.out.println(Chrono.elapsedTime());
+
     }
 }
