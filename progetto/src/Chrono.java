@@ -10,6 +10,7 @@
  * void startChrono()   : comincia a cronometrare 
  * void endChrono()     : smette di cronometrare
  * long elapsedTime()   : calcola il tempo di eseguzione
+ * double tMin()        : tempo minimo misurabile
  * 
  * 
  * NB: mancano controlli di sicurezza per verificare la possibile sovrascrittura di dati.
@@ -17,23 +18,35 @@
  * startChrono() -> endChrono() -> elapsedTime()
 */
 
-
 public class Chrono {
 
     private static long startTime;
     private static long endTime;
 
     public static void startChrono() {
-        startTime= System.nanoTime();
+        startTime = System.nanoTime();
     }
 
     public static void endChrono() {
-        endTime= System.nanoTime();
+        endTime = System.nanoTime();
     }
 
-    public static long elapsedTime(){        
+    public static long elapsedTime() {
 
-        return endTime - startTime; 
+        return endTime - startTime;
+    }
+
+    private static double getResolution() {
+        double start = System.nanoTime();
+        double end;
+        do {
+            end = System.nanoTime();
+        } while (start == end);
+        return end - start;
+    }
+
+    public static double tMin(){
+        return getResolution()*((1/0.001) +1);
     }
 
 }
