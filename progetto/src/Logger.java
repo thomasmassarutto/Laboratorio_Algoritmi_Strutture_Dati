@@ -50,7 +50,7 @@ public class Logger {
     }
 
     // crea stringa di log
-    public static void logPerformanceString(long run, String algorithm, long stringlength, long duration, long estimatedduration) {
+    public static void logPerformanceString(int run, String algorithm, long stringlength, long duration, long estimatedduration) {
 
         String logline= "";
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
@@ -65,7 +65,7 @@ public class Logger {
             FileWriter myWriter = new FileWriter(filename, true);
             myWriter.write(line + "\n");
             myWriter.close();
-            System.out.println("Linea aggiunta");
+            //System.out.println("Linea aggiunta");
         } catch (IOException e) {
             System.out.println("Errore");
             e.printStackTrace();

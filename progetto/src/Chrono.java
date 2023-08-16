@@ -7,10 +7,11 @@
  * tempo di eseguzione media di nanoTime(): circa 25 nanosecondi
  * 
  * PUBBLICO:
- * void startChrono()   : comincia a cronometrare 
- * void endChrono()     : smette di cronometrare
- * long elapsedTime()   : calcola il tempo di eseguzione
- * double tMin()        : tempo minimo misurabile
+ * void startChrono()           : comincia a cronometrare 
+ * void endChrono()             : smette di cronometrare
+ * long elapsedTime()           : calcola il tempo di eseguzione
+ * double getResolution()   	: stimare la risoluzione del clock di sistema
+ * double tMin()                : tempo minimo misurabile
  * 
  * 
  * NB: mancano controlli di sicurezza per verificare la possibile sovrascrittura di dati.

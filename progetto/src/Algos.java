@@ -12,6 +12,7 @@
 */
 
 public class Algos {
+    public static int ERR = -1;
 
     public static int periodNaive(String stringa) {
         
@@ -26,13 +27,14 @@ public class Algos {
             }
 
         }
-
-        return -1;
+        
+        
+        return ERR;
     }
 
-    public static long periodSmart(String stringa) {
-        long periodo=0;
+    public static int periodSmart(String stringa) {
+        int periodo=0;
 
-        return periodo;
+        return ERR;
     }
 }
