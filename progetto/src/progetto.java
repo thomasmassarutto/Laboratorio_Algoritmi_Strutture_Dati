@@ -1,36 +1,7 @@
-
-// periodo frazionario
-
-/* 
- * Pseudo:
- *  //inizializzazione ambiente lavoro
- *  Tmin;
- *  inizializzaFile();
- *  //prove
- *  for (i: 0->99){
- *      s= generaStringa();
- * 
- *      //raccolta dati Naive;
- *      start= now();
- *      naivecounter=0;
- *      do{
- *          Naive(s)
- *          end= now();
- *          }while( end-start < Tmin)
- *      elapsed= end-start;
- *      log(naiveRun);
- * 
- *      //raccolta dati Smart;
- *      start= now();
- *      naivecounter=0;
- *      do{
- *          Naive(s)
- *          end= now();
- *          }while( end-start < Tmin)
- *      elapsed= end-start;
- *      log(smartRun);
- * 
- * }
+/*PERIODO FRAZIONARIO DI UNA STRINGA*/
+/* Questa classe contiene il main del progetto.
+* 
+*
 */
 public class Progetto {
 
