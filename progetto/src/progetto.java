@@ -42,6 +42,8 @@ public class Progetto {
 
         for (int run = 1; run <= 5; run++) {
             for (int i = 0; i < 100; i++) {
+                System.out.println("run: "+ run +" ite: " + i);
+
                 String s = StringGenerator.generateString(i);
 
                 int iterations = 0;
