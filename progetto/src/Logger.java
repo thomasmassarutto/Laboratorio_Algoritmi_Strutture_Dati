@@ -21,13 +21,11 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Logger {
 
     public static final String filename = "./progetto/results.csv";
-    public static final String colnames = "Algorithm.Type,String.Length,Duration,Fractional.Period";
+    public static final String colnames = "Algorithm.Type,String.Length,Duration,Fractional.Period,Run";
 
     // inizializza il file: creazione + colonne
     public static void initializeFile() {
@@ -48,11 +46,11 @@ public class Logger {
     }
 
     // crea stringa di log
-    public static void logPerformanceString(String algorithm, long stringlength, long duration, long fractionalperiod) {
+    public static void logPerformanceString(String algorithm, long stringlength, long duration, long fractionalperiod, int run) {
 
         String logline= "";
 
-        logline=algorithm+","+stringlength+","+duration+","+fractionalperiod;
+        logline=algorithm+","+stringlength+","+duration+","+fractionalperiod+","+run;
         writeLine(logline);
     }
 
