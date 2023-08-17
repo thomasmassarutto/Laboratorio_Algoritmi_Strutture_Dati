@@ -13,9 +13,6 @@
  *          i=0  -> n=1 000
  *          i=99 -> n=500 000
  * 
- * !!!  IMPORTANTE  !!!
- * Ok, ma cosi facendo sono in grado di generare solo 100 lunghezze di stringhe separate
- * mi sembra un po poco... vabbe.
  * 
  * La stringa e' generata casualmente su un alfabeto ternario (a,b,c) in cui le lettere
  * sono generatepseudo casualmente, in maniera indipendente l'una dall'altra.
@@ -29,22 +26,12 @@ public class StringGenerator {
     private static final double B = 1.0647859778233493;
     private static final char[] alfabeto = { 'a', 'b', 'c' };
 
-    // genera una lunghezza random 1 000<= n <= 500 000
-    private static int generateLength() {
-
-        Random random = new Random();
-        int numeroCasuale = random.nextInt(100);
-        double lunghezzastringa = A * Math.pow(B, numeroCasuale);
-
-        return (int) lunghezzastringa;
-    }
-
-    public static String generateString() {
+    // genera una stringa data una lunghezza
+    public static String generateString(int l) {
 
         String stringa = "";
         Random random = new Random();
-        int length = generateLength();
-
+        long length = (long) (A * Math.pow(B, l));
         for (int i = 0; i < length; i++) {
             int index = random.nextInt(alfabeto.length);
             stringa = stringa + alfabeto[index];

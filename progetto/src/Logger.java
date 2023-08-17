@@ -12,8 +12,6 @@
  *                      long duration: durata della run in millisecondi
  * 
  * Colonne CSV: Timestamp, Run, Algorithm.Type, String.Length, Duration
- * Timestamp        : timestamp della run
- * Run              : numero della run
  * Algorithm.Type   : tipo di algoritmo (PeriodNaive / PeriodSmart)
  * String.Length    : lunghezza della stringa su cui viene testato l'algoritmo
  * Duration         : durata della run in millisecondi
@@ -29,7 +27,7 @@ import java.util.Date;
 public class Logger {
 
     public static final String filename = "./progetto/results.csv";
-    public static final String colnames = "Timestamp,Run,Algorithm.Type,String.Length,Duration,Estimated.Duration";
+    public static final String colnames = "Algorithm.Type,String.Length,Duration,Fractional.Period";
 
     // inizializza il file: creazione + colonne
     public static void initializeFile() {
@@ -50,16 +48,15 @@ public class Logger {
     }
 
     // crea stringa di log
-    public static void logPerformanceString(int run, String algorithm, long stringlength, long duration, long estimatedduration) {
+    public static void logPerformanceString(String algorithm, long stringlength, long duration, long fractionalperiod) {
 
         String logline= "";
-        String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
 
-        logline= timeStamp +","+ run+","+algorithm+","+stringlength+","+duration+","+estimatedduration;
+        logline=algorithm+","+stringlength+","+duration+","+fractionalperiod;
         writeLine(logline);
     }
 
-    // aggiunge riga
+    // aggiunge riga al file
     private static void writeLine(String line) {
         try {
             FileWriter myWriter = new FileWriter(filename, true);

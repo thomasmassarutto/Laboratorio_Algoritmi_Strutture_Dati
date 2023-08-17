@@ -2,6 +2,7 @@
  * Classe Algos:
  * 
  * Questa classe contiene gli algoritmi inerenti al progetto: PeriodNaive e PeriodSmart
+ * Gli algoritmi servono a calcolare il periodo frazionario di una stringa
  * 
  * PUBBLICO:
  * long periodNaive(...): periodo stringa in tempo quadratico 
