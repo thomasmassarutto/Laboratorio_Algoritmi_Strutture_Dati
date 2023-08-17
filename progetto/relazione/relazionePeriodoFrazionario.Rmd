@@ -9,22 +9,88 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## raccolta di funzioni utili
+```{r functions}
+library(ggplot2)
+library(dplyr)
+results <-read.csv("../../progetto/results.csv")
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+plotrun<-function(idRun){
+  
+  runDataSet= filter(results,Run == idRun)
+  
+  # Creazione del grafico a pallini
+ggplot(runDataSet, 
+       aes(x = String.Length, 
+           y = Duration, 
+           color = Algorithm.Type)) +
+  
+  geom_point() +
+  
+  scale_color_manual(values = c("naive" = "red", 
+                                "smart" = "blue")) +
+  
+  labs(title = "Durata vs Lunghezza della stringa",
+       color = "Tipologia di Algoritmo")
+  
+}
+#####
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+average <-function(algo){
+  # Filtra i risultati per l'algoritmo "naive"
+algo_results <- results %>%
+  filter(Algorithm.Type == algo)
 
-```{r cars}
-summary(cars)
+# Raggruppa per lunghezza della stringa e calcola la media della durata
+average_duration_by_length <- algo_results %>%
+  group_by(String.Length) %>%
+  summarise(avg_duration = mean(Duration))
+
+# Visualizza la tabella
+print(average_duration_by_length)
+}
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
+## dim complessita
+## dim logica/matematica
+```{r dims}
 
-```{r pressure, echo=FALSE}
-plot(pressure)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## mostrare il plot delle 5 run: un grafico a punti:
+## rosso: naive
+## blu: smart
+```{r 5runs}
+
+plotrun(1)
+plotrun(2)
+plotrun(3)
+plotrun(4)
+plotrun(5)
+
+```
+
+
+## mostrare due plot:
+## media delle run naive
+## media delle run smart
+```{r average}
+average("naive")
+average("smart")
+
+
+
+```
+
+
+## scala logaritmica
+```{r reg}
+
+```
+
+## regressione
+```{r reg}
+
+```
+
