@@ -33,9 +33,26 @@ public class Algos {
         return ERR;
     }
 
-    public static int periodSmart(String stringa) {
-        int periodo=0;
+    public static int periodSmart(String s) {
+        int n = s.length();
+        int[] r = new int[n + 1];
+        r[1] = 0;
 
-        return ERR;
+        for (int i = 2; i <= n; i++) {
+            int j = r[i - 1];
+            while (j > 0 && s.charAt(i - 1) != s.charAt(j)) {
+                j = r[j];
+            }
+            if (s.charAt(i - 1) == s.charAt(j)) {
+                r[i] = j + 1;
+            } else {
+                r[i] = 0;
+            }
+        }
+
+        int maxBordo = r[n];
+        int periodoFrazionario = n - maxBordo;
+
+        return periodoFrazionario;
     }
 }

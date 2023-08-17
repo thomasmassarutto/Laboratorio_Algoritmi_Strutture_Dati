@@ -37,11 +37,11 @@ public class Progetto {
 
     public static void main(String[] args) {
 
-        //calcolo 
+        
         double tmin = Chrono.tMin();
 
         Logger.initializeFile();
-        for (int j = 0; j < 10; j++) {
+        for (int j = 0; j < 100; j++) {
             String s = StringGenerator.generateString(j);
             int i = 0;
 
@@ -50,16 +50,18 @@ public class Progetto {
             long fractionalperiod= -1;
 
             do {
-                fractionalperiod = Algos.periodNaive(s);
+                fractionalperiod = Algos.periodSmart(s);
                 end= Chrono.now();
                 i++;
 
             } while (end-start < tmin);
             long elapsed= end - start; 
             System.out.println(i);
-            Logger.logPerformanceString("naive", s.length(), elapsed/i, fractionalperiod);
+            Logger.logPerformanceString("smart", s.length(), elapsed/i, fractionalperiod);
 
         }
+      
+        //System.out.println(Algos.periodSmart("abcabcabc"));
 
     }
 }
