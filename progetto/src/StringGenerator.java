@@ -3,19 +3,17 @@
  * 
  * Questa classe si occupa di generare stringhe casuali secondo le direttive del progetto.
  * La lungehzza n deve essere compresa in un range di valori fra 1000 e 500000,
- * con una distribuzione preferibilmente esponenziale.
- * Ad esempio, n potrebbe essere definito da una funzione esponenziale in i del tipo ⌊A⋅B^i⌋
+ * con una distribuzione esponenziale.
+ * n (lunghezza della stringa) e' definito da una funzione in i del tipo A⋅B^i
  * In cui: 
- * i= intero 0-99
- * A, B= costanti virgola mobile (float/double) 
+ *      i= intero 0-99
+ *      A, B= costanti virgola mobile (double) 
  * 
  * inoltre se:
- *          i=0  -> n=1 000
- *          i=99 -> n=500 000
+ *          i=0  -> n= 1000
+ *          i=99 -> n= 500000
  * 
- * 
- * La stringa e' generata casualmente su un alfabeto ternario (a,b,c) in cui le lettere
- * sono generatepseudo casualmente, in maniera indipendente l'una dall'altra.
+ * La stringa e' generata casualmente su un alfabeto ternario (a,b,c)
  */
 
 import java.util.Random;

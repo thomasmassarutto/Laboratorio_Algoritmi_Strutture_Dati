@@ -6,15 +6,18 @@
  * PUBBLICO:
  * void initializeFile()            :crea un file denominato "results.csv" e inizializza l'intestazione delle colonne
  * void logPerformanceString(...)   :aggiunge una nuova riga al file contentete parametri utili per l'analisi delle performance
- *                      long run: numero della run
  *                      String Algorithm: tipo di algoritmo (PeriodNaive / PeriodSmart)
  *                      long stringlength: lunghezza della stringa su cui viene testato l'algoritmo
  *                      long duration: durata della run in millisecondi
+ *                      long fractionalperiod: lunghezza del periodo
+ *                      int run: numero della run
  * 
- * Colonne CSV: Timestamp, Run, Algorithm.Type, String.Length, Duration
+ * Colonne CSV: Timestamp, Run, Algorithm.Type, String.Length, Duration, Fractional.Period,Run
  * Algorithm.Type   : tipo di algoritmo (PeriodNaive / PeriodSmart)
  * String.Length    : lunghezza della stringa su cui viene testato l'algoritmo
  * Duration         : durata della run in millisecondi
+ * Fractional.Period: periodo frazionario
+ * Run              : numero della run
  * 
 */
 
@@ -27,7 +30,7 @@ public class Logger {
     public static final String filename = "./progetto/results.csv";
     public static final String colnames = "Algorithm.Type,String.Length,Duration,Fractional.Period,Run";
 
-    // inizializza il file: creazione + colonne
+    // inizializza il file dei risultati
     public static void initializeFile() {
 
         try {
@@ -67,7 +70,7 @@ public class Logger {
         }
     }
 
-    // aggiunge intestazione alle colonne
+    // aggiunge nome colonne al file csv
     private static void writeColnames() {
         try {
             FileWriter myWriter = new FileWriter(filename);

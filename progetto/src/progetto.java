@@ -1,9 +1,15 @@
 /*PERIODO FRAZIONARIO DI UNA STRINGA*/
 /* Questa classe contiene il main del progetto.
 * 
-*
+* Testa l'implementazione dei due algoritmi PeriodNaive e Periodsmart e prende nota dei tempi medi d'esecuzione
+*  
+* Esegue MAX_RUNS run durante le quali genera 100 strighe (da 1000 a 500000 caratteri, sempre piu' lunghe) e le
+* fornisce in input aglio algoritmi.
+* I dati sono salvati nel file "results.csv" 
 */
 public class Progetto {
+
+    public static final int MAX_RUNS= 6;
 
     public static void main(String[] args) {
 
@@ -11,11 +17,11 @@ public class Progetto {
 
         Logger.initializeFile();
 
-        for (int run = 1; run <= 5; run++) {
-            for (int i = 0; i < 100; i++) {
-                System.out.println("run: "+ run +" ite: " + i);
+        for (int run = 1; run <= MAX_RUNS; run++) {
+            for (int test = 0; test <= 99; test++) {
+                System.out.println("run: "+ run +" test: " + test);
 
-                String s = StringGenerator.generateString(i);
+                String s = StringGenerator.generateString(test);
 
                 int iterations = 0;
                 long fractionalperiod = -1;
