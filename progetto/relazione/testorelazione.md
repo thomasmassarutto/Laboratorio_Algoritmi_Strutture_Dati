@@ -14,7 +14,7 @@ $$s(i)=s(i+p) \quad \forall i= 1, \dots , n-p$$
 
 ### PeriodNaive
 
-_PeriodNaive_ è un algoritmo di complessità O(n^2^) che, mediante un ciclo _for_ che, iterando sulla stringa, ne analizza ogni possibile periodo di lunghezza _p_. La suddivisione della stringa avviene in due parti: _head_ e _tail_, quando queste coincidono viene restituita la lunghezza _p_.
+_PeriodNaive_ è un algoritmo di complessità $O(n^2)$ che, mediante un ciclo _for_, itera su di una stringa, e ne analizza ogni possibile periodo. Partendo da un periodo di lunghezza _p=1_ e incrementando di uno ogni volta il valore, la stringa viene suddivisa in due parti: _head_ e _tail_. Quando queste coincidono l'esecuzione termina e viene restituita la lunghezza finale _p_.
 
 ```
 Funzione periodoNaive(Stringa):
@@ -58,25 +58,25 @@ $$
 
 ### PeriodSmart
 
-_PeriodSmart_ è un algoritmo di complessità O(n) che utilizza il concetto di _bordo_ per calcolare la lunghezza del _periodo frazionario minimo_. Genera un _array_ per memorizzare la lunghezza dei bordi delle sottostringhe (`r[i]` è il bordo della sottostringa che termina in posizione `i - 1`) e poi _itera_ sulla stringa cercando per ogni carattere un bordo fra i caratteri precedenti. Se il carattere corrente coincide col bordo, incrementa la lunghezza del bordo, altrimenti la riduce cercando un bordo più corto. Il periodo frazionario minimo è dato dalla lunghezza della stringa meno la lunghezza massima del bordo.
+_PeriodSmart_ è un algoritmo di complessità $O(n)$ che utilizza il concetto di _bordo_ per calcolare la lunghezza del _periodo frazionario minimo_. Genera un _array_ per memorizzare la lunghezza dei bordi delle sottostringhe (`r[i]` è il bordo della sottostringa che termina in posizione `i - 1`) e poi _itera_ sulla stringa cercando per ogni carattere un bordo fra i caratteri precedenti. Se il carattere corrente coincide col bordo, incrementa la lunghezza del bordo, altrimenti la riduce cercando un bordo più corto. Il periodo frazionario minimo è dato dalla lunghezza della stringa meno la lunghezza massima del bordo.
 
 ```
-Funzione periodSmart(stringa):
-    n = lunghezza(s)
-    r = array di interi di dimensione n + 1
-    r[1] = 0
-    ITERA i da 2 fino a n:
-        j = r[i - 1]
-        FINCHE 	j > 0,
-		        carattere in posizione (i - 1) di s != dal carattere in posizione j di stringa:
-            j = r[j]
-        SE carattere in posizione (i - 1) di s == al carattere in posizione j di stringa:
-            r[i] = j + 1
+Funzione periodSmart(S: stringa):
+    N = lunghezza(s)
+    R = array di interi di dimensione n + 1
+    R[1] = 0
+    ITERA I da 2 fino a N:
+        J = R[I - 1]
+        FINCHE 	J > 0,
+		        carattere in (i - 1) di S != dal carattere in posizione J di S:
+            J = R[J]
+        SE carattere in (I - 1) di S == al carattere in J di s:
+            R[I] = J + 1
         ALTRIMENTI:
-            r[i] = 0
-    maxBordo = r[n]
-    periodoFrazionario = n - maxBordo
-    RESTITUISCI periodoFrazionario
+            R[I] = 0
+    MaxBordo = R[N]
+    PeriodoFrazionario = N - MaxBordo
+    RESTITUISCI PeriodoFrazionario
 ```
 
 #### Calcolo di correttezza
@@ -118,15 +118,15 @@ $$
 
 Per valutare le prestazioni degli algoritmi in maniera empirica si è deciso di realizzare un programma Java in grado di misurare i tempi medi di esecuzione degli algoritmi. Il progetto si suddivide in 5 classi:
 
-- **Progetto**: classe principale che contiene i passaggi per testare, cronometrare e ricavare dati dagli algoritmi.
+- **Progetto**: classe principale che contiene i passaggi per testare, cronometrare e ricavare dati utili in fase di analisi.
 - **Algos**: contiene l'implementazione degli algoritmi per il calcolo del periodo frazionario minimo di una stringa.
 - **Chrono**: fornisce meccanismi di cronometraggio necessari per misurare il tempo di esecuzione del programma e la stima di risoluzione del clock di sistema in nanosecondi.
 - **Logger**: gestisce la registrazione delle informazioni rilevanti su un file .csv.
-- **StringGenerator**: genera stringhe di test con varie lunghezze comprese fra 1000 e 500000. Queste hanno una distribuzione esponenziale e sono basate su un alfabeto ternario: _a_, _b_, _c_
+- **StringGenerator**: genera stringhe casuali con varie lunghezze comprese fra 1000 e 500000. Queste hanno una distribuzione esponenziale e sono basate su un alfabeto ternario: _a_, _b_, _c_.
 
 ### Metodologia di test
 
-Una volta calcolato il _tempo minimo misurabile_, per ricavare dati attendibili sono state eseguite 6 run da 100 iterazioni ciascuna. Ad ogni iterazione una stringa generata casualmente, e progressivamente sempre più lunga, è stata fornita in input prima ad un algoritmo e poi ad un altro. È stato utilizzato un ciclo _while_ per iterare l'esecuzione dell'algoritmo e misurare il tempo trascorso, fino a quando tale tempo non è risultato superiore al _tempo minimo misurabile_. Il _tempo medio di esecuzione_ per una singola istanza di input è stato calcolato come il rapporto fra il tempo trascorso e il numero di iterazioni "_while_" eseguite.
+Una volta calcolato il _tempo minimo misurabile_, per ricavare dati attendibili sono state eseguite 6 run da 100 iterazioni ciascuna. Ad ogni iterazione una stringa generata casualmente, e progressivamente sempre più lunga, è stata fornita in input ad entrambi gli algoritmi. È stato utilizzato un ciclo _while_ per iterare l'esecuzione dell'algoritmo e misurare il tempo trascorso, fino a quando tale tempo non è risultato superiore al _tempo minimo misurabile_. Il _tempo medio di esecuzione_ per una singola istanza di input è stato calcolato come il rapporto fra il tempo trascorso e il numero di iterazioni "_while_" eseguite.
 
 ```
 Progetto main():
@@ -140,7 +140,7 @@ Progetto main():
 			FAI{
 				algoritmo(stringa)
 				end= now()
-				i++
+				iterazione++
 			}FINCHÈ (end-start< tmin)
 			tempo_medio= (end-start)/i
 			// testa algoritmo 2

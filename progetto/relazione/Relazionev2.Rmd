@@ -18,10 +18,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(ggplot2)
 library(dplyr)
+library(grid)
 library(gridExtra)
 results <-read.csv("results2.csv")
 
-plotrun<-function(idRun){
+## plotta una singola run 
+smallPlotRun<-function(idRun){
   
   runDataSet= filter(results,Run == idRun)
   
@@ -36,16 +38,21 @@ plotrun<-function(idRun){
     scale_color_manual(values = c("naive" = "red", 
                                   "smart" = "blue")) +
     
-    labs(title = "Durata vs Lunghezza della stringa",
-         x= "Lunghezza della stringa",
-         y="Durata (nanosecondi)",
-         color = "Tipologia di Algoritmo")
+    scale_y_continuous(labels = scales::label_number(scale = 1e-6, suffix = "M"),
+                       name = "Nanosecondi") +
+    
+    scale_x_continuous(labels = scales::label_number(scale = 1e-3, suffix = "K"),
+                       name = "Lunghezza stringa") +
+    
+    theme(legend.position="none")
   
 }
 #####
 
+## Calcola la media delle run
+## ritorna dataset con 2 colonne: string.Length, avg_duration
 average <-function(algo){
-  # Filtra i risultati per l'algoritmo "naive"
+  # Filtra i risultati per l'algoritmo 
   algo_results <- results %>%
     filter(Algorithm.Type == algo)
   
@@ -77,16 +84,24 @@ plot_first_30 <- function(data, point_color) {
 ```
 
 
-```{r 5runs , echo=FALSE}
+```{r 6runs , echo=FALSE}
 ##
-## plot delle di raccolta dati eseguite
+## plot delle 5 run di raccolta dati eseguite
 ##
-plotrun(1)
-plotrun(2)
-plotrun(3)
-plotrun(4)
-plotrun(5)
-plotrun(6)
+run1<- smallPlotRun(1)
+run2<- smallPlotRun(2)
+run3<- smallPlotRun(3)
+run4<- smallPlotRun(4)
+run5<- smallPlotRun(5)
+run6<- smallPlotRun(6)
+
+
+
+
+grid.arrange(run1, run2, run3, run4, run5, run6, 
+             ncol = 2, nrow = 3, 
+             top=textGrob("Durata vs Lunghezza della stringa"))
+
 
 ```
 
@@ -161,7 +176,7 @@ print(selected_rows)
 
 ```
 
-```{r reg , echo=FALSE}
+```{r reg2 , echo=FALSE}
 library(dplyr)
 
 # Raggruppa il dataframe in intervalli di dimensione 10
