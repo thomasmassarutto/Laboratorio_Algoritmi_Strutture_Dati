@@ -151,8 +151,8 @@ Progetto main():
 
 ### Risultati sperimentali di vari test
 
-Analizzando i grafici Durata vs Lunghezza della stringa si nota subito come i tempi di risoluzione dell'algoritmo _PeriodNaive_ crescano in maniera esponenziale, tanto da far sembrare nulli i tempi relativi a _PeriodSmart_.
+Analizzando i grafici _Durata_ vs _Lunghezza della stringa_ si nota che, mentre i tempi di risoluzione relativi all'algoritmo _PeriodNaive_ crescono esponenzialmente, quelli relativi a _PeriodSmart_ hanno una crescita lineare.
+Sin dalle prime iterazioni il delta temporale fra i due algoritmi è dell'ordine di qualche millisecondo. Questa questa differenza amplifica esponenzialmente raggiungento oltre mezzo secondo nelle iterazioni finali.
 
-### Riassunto dei dati
 
 ## Riferimenti

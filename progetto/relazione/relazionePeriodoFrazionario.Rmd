@@ -2,7 +2,9 @@
 title: "Periodo frazionario"
 author: "Thomas Massarutto"
 date: "2023-08-17"
-output: pdf_document
+output:
+  pdf_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -16,6 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(ggplot2)
 library(dplyr)
+library(gridExtra)
 results <-read.csv("../../progetto/results.csv")
 
 plotrun<-function(idRun){
@@ -44,6 +47,9 @@ average <-function(algo){
 algo_results <- results %>%
   filter(Algorithm.Type == algo)
 
+# Imposta l'opzione per la notazione esponenziale
+options(scipen = 999)
+
 # Raggruppa per lunghezza della stringa e calcola la media della durata
 average_duration_by_length <- algo_results %>%
   group_by(String.Length) %>%
@@ -53,35 +59,46 @@ average_duration_by_length <- algo_results %>%
 }
 #####
 
+# Definizione della funzione per il plot delle prime 20 righe
+plot_first_30 <- function(data, point_color) {
+  # Prende solo le prime 20 righe
+  subset_data <- head(data, 30)
+  
+  # Creazione del grafico
+  ggplot(subset_data, aes(x = String.Length, y = avg_duration)) +
+    geom_point(color = point_color) +
+    labs(title = "Primi 30 dati: Durata media vs Lunghezza della stringa",
+         x = "Lunghezza della stringa",
+         y = "Durata media")
+}
+
 ```
 
-## dim complessita
-
-## dim logica/matematica
 
 ```{r dimostrazioni}
 
 ```
-# Raccolta dati
 
 
 ```{r 5runs , echo=FALSE}
 ##
-## plot delle 5 run di raccolta dati eseguite
+## plot delle di raccolta dati eseguite
 ##
 plotrun(1)
 plotrun(2)
 plotrun(3)
 plotrun(4)
 plotrun(5)
+plotrun(6)
+
 
 ```
-
-
 
 ```{r averagerun, echo=FALSE}
 naive <- average("naive")
 smart <- average("smart")
+summary(naive)
+summary(smart)
 
   
 # Creazione del grafico a pallini
@@ -92,6 +109,9 @@ ggplot(naive,
   
   geom_point(color='red') +
   
+  scale_x_log10() +  # Scala logaritmica sull'asse x
+  scale_y_log10() +  # Scala logaritmica sull'asse y
+  
   labs(title = "Durata vs Lunghezza della stringa")
 
 # Creazione del grafico a pallini
@@ -100,6 +120,9 @@ ggplot(smart,
            y = avg_duration 
            )) +
   
+  scale_x_log10() +  # Scala logaritmica sull'asse x
+  scale_y_log10() +  # Scala logaritmica sull'asse y
+  
   geom_point(color='blue') +
   
   labs(title = "Durata vs Lunghezza della stringa")
@@ -107,11 +130,30 @@ ggplot(smart,
 
 
 ```{r log , echo=FALSE}
+##
+## display dei primi 20 elementi
+##
+plot_first_30(naive, "red")
+plot_first_30(smart, "blue")
+
 
 ```
-
 
 ```{r reg , echo=FALSE}
+delta_time <- data.frame(
+  String.Length = naive$String.Length,  # Copia la colonna String.Length da naive
+  naive_avg_duration= naive$avg_duration,
+  smart_avg_duration= smart$avg_duration,
+  avg_delta_duration = naive$avg_duration - smart$avg_duration  # Calcola la differenza delle durate
+)
+
+summary(delta_time)
+
+# Indici delle righe desiderate
+indices <- c(1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+
+# Seleziona le righe dal dataframe delta_time
+selected_rows <- delta_time[indices, ]
+print(selected_rows)
 
 ```
-
