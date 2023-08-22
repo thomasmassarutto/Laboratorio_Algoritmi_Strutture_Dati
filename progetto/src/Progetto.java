@@ -4,7 +4,7 @@
 * Testa l'implementazione dei due algoritmi PeriodNaive e Periodsmart e prende nota dei tempi medi d'esecuzione
 *  
 * Esegue MAX_RUNS run durante le quali genera 100 strighe (da 1000 a 500000 caratteri, sempre piu' lunghe) e le
-* fornisce in input aglio algoritmi.
+* fornisce in input agli algoritmi.
 * I dati sono salvati nel file "results.csv" 
 */
 public class Progetto {
