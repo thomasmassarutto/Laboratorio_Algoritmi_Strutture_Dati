@@ -3,6 +3,7 @@
 ## Scopo del progetto
 
 Lo scopo di questo progetto è implementare due algoritmi per il calcolo del _periodo frazionario minimo_ di una stringa e misurarne i tempi medi di esecuzione. Per _periodo frazionario minimo_ si intende, data una stringa _S_, la lunghezza (_p_) della sottostringa più breve che può essere ripetuta in modo da formare la stringa _S_. Deve quindi soddisfare la seguente proprietà:
+
 $$s(i)=s(i+p) \quad \forall i= 1, \dots , n-p$$
 
 - $s$: stringa
