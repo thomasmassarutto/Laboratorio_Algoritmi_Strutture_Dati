@@ -151,8 +151,23 @@ Progetto main():
 
 ### Risultati sperimentali di vari test
 
-Analizzando i grafici _Durata_ vs _Lunghezza della stringa_ si nota che, mentre i tempi di risoluzione relativi all'algoritmo _PeriodNaive_ crescono esponenzialmente, quelli relativi a _PeriodSmart_ hanno una crescita lineare.
-Sin dalle prime iterazioni il delta temporale fra i due algoritmi è dell'ordine di qualche millisecondo. Questa questa differenza amplifica esponenzialmente raggiungento oltre mezzo secondo nelle iterazioni finali.
+Analizzando i grafici _Durata_ vs _Lunghezza della stringa_ si nota come, i tempi di risoluzione relativi all'algoritmo _PeriodNaive_ crescono esponenzialmente, mentre,  quelli relativi a _PeriodSmart_ hanno una crescita lineare.
 
+Sin dalle prime iterazioni il delta temporale fra i due algoritmi è dell'ordine di qualche millisecondo. Questa questa differenza aumenta esponenzialmente raggiungendo oltre mezzo secondo nelle iterazioni finali.
+
+Basandosi sui dati raccolti, è possibile creare un modello in grado di prevedere l'andamento temporale dei due algoritmi. In particolare l'evoluzione del modello Naive può essere descritta da un'equazione di secondo grado:
+
+$$
+y_{naive} = 565335.910 + 142.414 \cdot x + 0.146 \cdot x^2
+$$
+
+La validità del modello è supportata dagli indici statistici, in particolare il _Residual Standard Error_ indica come l'errore standard dei residui sia di circa 13.73 millisecondi. Gli indici _Multiple R-squared_ e _Adjusted R-squared_, atti a spiegare la variabilità dei dati,hanno totalizzato il valore massimo di 1. Infine il _p-value_ è di gran lunga inferiore alla soglia di 0.05 ($2,2 \times 10^{-16}$), il che indica un risultato statisticamente significativo. 
+
+L'evoluzione del modello Smart può essere, invece, descritta da un'equazione di primo grado:
+$$
+y_{smart} = 10679.087 +  6.607 \cdot x
+$$
+
+Anche in questo caso la validità del modello è supportata dagli indici statistici, in particolare il _Residual Standard Error_ indica come l'errore standard dei residui sia di circa 0,0448 millisecondi. Gli indici _Multiple R-squared_ e _Adjusted R-squared_,hanno totalizzato il valore quasi massimo di 0.9969. Infine il _p-value_ è di gran lunga inferiore alla soglia di 0.05 ($2,2 \times 10^{-16}$), il che indica un risultato statisticamente significativo.
 
 ## Riferimenti

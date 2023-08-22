@@ -50,9 +50,10 @@ smallPlotRun<-function(idRun){
 #####
 
 ## Calcola la media delle run
-## ritorna dataset con 2 colonne: string.Length, avg_duration
+## ritorna dataset con 2 colonne: string.Length, Duration
+## Duration è la media delle run
 average <-function(algo){
-  # Filtra i risultati per l'algoritmo 
+  # Filtra i risultati per l'algoritmo "naive"
   algo_results <- results %>%
     filter(Algorithm.Type == algo)
   
@@ -62,7 +63,7 @@ average <-function(algo){
   # Raggruppa per lunghezza della stringa e calcola la media della durata
   average_duration_by_length <- algo_results %>%
     group_by(String.Length) %>%
-    summarise(avg_duration = mean(Duration))
+    summarise(Duration = mean(Duration))
   
   return (average_duration_by_length)
 }
@@ -74,7 +75,7 @@ plot_first_30 <- function(data, point_color) {
   subset_data <- head(data, 30)
   
   # Creazione del grafico
-  ggplot(subset_data, aes(x = String.Length, y = avg_duration)) +
+  ggplot(subset_data, aes(x = String.Length, y = Duration)) +
     geom_point(color = point_color) +
     labs(title = "Primi 30 dati: Durata media vs Lunghezza della stringa",
          x = "Lunghezza della stringa",
@@ -108,76 +109,103 @@ grid.arrange(run1, run2, run3, run4, run5, run6,
 ```{r averagerun, echo=FALSE}
 naive <- average("naive")
 smart <- average("smart")
-summary(naive)
-summary(smart)
 
+# Aggiungi le informazioni calcolate al dataset "results"
+results <- bind_rows(
+  results,
+  mutate(naive, 
+         Algorithm.Type =  "naive",
+         Fractional.Period = NA,
+         Run = 0)
+)
 
-# Creazione del grafico a pallini
+results <- bind_rows(
+  results,
+  mutate(smart, 
+         Algorithm.Type =  "smart",
+         Fractional.Period = NA,
+         Run = 0)
+)
+
+## plotta la media
+average_results <- filter(results, Run == 0)
+ggplot(average_results, 
+       aes(x = String.Length, 
+           y = Duration, 
+           color = Algorithm.Type)) +
+  
+  geom_point() +
+  
+  scale_color_manual(values = c("naive" = "red", 
+                                "smart" = "blue")) +
+  
+  scale_x_log10() +  # Scala logaritmica sull'asse x
+  scale_y_log10() +  # Scala logaritmica sull'asse y
+  
+  labs(title = "Durata vs Lunghezza della stringa (scala logaritmica)",
+       x= "Lunghezza della stringa (caratteri)",
+       y="Durata (nanosecondi)",
+       color = "Tipologia di Algoritmo")
+```
+```{r previsions , echo=FALSE}
+# prevedi con regressione
+
+#####
+
+naiveRegression= lm(Duration ~ poly(String.Length, 2, raw=TRUE), data = naive )
+coefficenti_naive<-coef(naiveRegression)
+
 ggplot(naive, 
        aes(x = String.Length, 
-           y = avg_duration 
+           y = Duration
        )) +
   
   geom_point(color='red') +
   
-  scale_x_log10() +  # Scala logaritmica sull'asse x
-  scale_y_log10() +  # Scala logaritmica sull'asse y
+stat_smooth( method = "lm", 
+             formula = y ~ poly(x, 2, raw = TRUE), 
+             se=TRUE, fill=NA,
+              colour="black"
+             )+
+
+  labs(title = "Durata vs Lunghezza della stringa",
+       x= "Lunghezza della stringa",
+       y="Durata (nanosecondi)"
+  )
+
+
+#####
+
+smartRegression=lm(Duration ~ String.Length, data = smart)
+coefficenti_smart<-coef(smartRegression)
+
+ggplot(smart, 
+       aes(x = String.Length, 
+           y = Duration
+       )) +
+  
+  geom_point(color='blue') +
+  
+  geom_smooth(method = "lm",formula = "y ~ x", se = FALSE, color = "black") + 
   
   labs(title = "Durata vs Lunghezza della stringa",
        x= "Lunghezza della stringa",
        y="Durata (nanosecondi)"
   )
 
-# Creazione del grafico a pallini
-ggplot(smart, 
-       aes(x = String.Length, 
-           y = avg_duration 
-       )) +
-  scale_x_log10() +  # Scala logaritmica sull'asse x
-  scale_y_log10() +  # Scala logaritmica sull'asse y
-  
-  geom_point(color='blue') +
-  
-  
-  labs(title = "Durata vs Lunghezza della stringa",
-       x= "Lunghezza della stringa",
-       y="Durata (nanosecondi)",
-  )
-```
 
+```
 
 ```{r log , echo=FALSE}
 ##
-## display dei primi 20 elementi
+## display dei primi 30 elementi
 ##
 plot_first_30(naive, "red")
 plot_first_30(smart, "blue")
 
-
-```
-
-```{r reg , echo=FALSE}
-delta_time <- data.frame(
-  String.Length = naive$String.Length,  # Copia la colonna String.Length da naive
-  naive_avg_duration= naive$avg_duration,
-  smart_avg_duration= smart$avg_duration,
-  avg_delta_duration = naive$avg_duration - smart$avg_duration,  # Calcola la differenza delle durate
-  avg_delta_duration_millis = (naive$avg_duration - smart$avg_duration)/ 100000  # millisecondi
-)
-
-summary(delta_time)
-
-# Indici delle righe desiderate
-indices <- c(1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
-
-# Seleziona le righe dal dataframe delta_time
-selected_rows <- delta_time[indices, ]
-print(selected_rows)
-
 ```
 
 ```{r reg2 , echo=FALSE}
-library(dplyr)
 
 # Raggruppa il dataframe in intervalli di dimensione 10
 delta_time_grouped <- delta_time %>%
@@ -186,8 +214,8 @@ delta_time_grouped <- delta_time %>%
   summarize(
     String.Length = paste(first(String.Length), last(String.Length), sep = "-"),
     
-    naive_avg_duration= mean(naive$avg_duration[Group]),
-    smart_avg_duration= mean(smart$avg_duration[Group]),
+    naive_avg_duration= mean(naive$Duration[Group]),
+    smart_avg_duration= mean(smart$Duration[Group]),
     
     avg_delta_duration = mean(avg_delta_duration),
     avg_delta_duration_millis = mean(avg_delta_duration_millis)
