@@ -7,7 +7,7 @@ Esercizi e le consegne per i progetti di laboratorio di Algoritmi e Strutture Da
 
 ## Elenco esercizi
 - [x] Esercizio 12 - periodo frazionario
-- [ ] Esercizio 18 - verifica di alberi binari di ricerca
+- [x] Esercizio 18 - verifica di alberi binari di ricerca
 - [ ] Esercizio 22 - alberi binari di ricerca
 - [ ] Esercizio 25 - distanza di editingVirtual programming lab
 
