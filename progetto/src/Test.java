@@ -20,7 +20,7 @@ public class Test {
 
         //fractionalperiod = Algos.periodNaive(s);
 
-        fractionalperiod = Algos.periodSmart(s);
+        //fractionalperiod = Algos.periodSmart(s);
 
         System.out.println(fractionalperiod);
 
