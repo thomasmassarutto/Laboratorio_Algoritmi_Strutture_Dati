@@ -18,7 +18,7 @@ public class Test {
         Scanner stringa = new Scanner(System.in);
         String s = stringa.nextLine();
 
-        //fractionalperiod = Algos.periodNaive(s);
+        fractionalperiod = Algos.periodNaive(s);
 
         //fractionalperiod = Algos.periodSmart(s);
 

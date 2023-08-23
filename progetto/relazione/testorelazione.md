@@ -29,7 +29,19 @@ Funzione periodoNaive(Stringa):
 	}
 ```
 
-#### Calcolo di correttezza
+#### Dimostrazione di correttezza
+
+##### Caso base: $P(1)$
+
+Il _caso base_ è quando la lunghezza del periodo è $p=1$. In questa situazione `head` e `tail` sono stringhe vuote, quindi il successivo test di uguaglianza risulta positivo e l'algoritmo ritorna l'indice di iterazione $1$.  
+
+##### Passo induttivo: $\forall p \ P(p) \Rightarrow P(p+1)$
+
+Nel caso in cui il periodo sia $p>1$ supponiamo come _ipotesi induttiva_ che il programma funzioni correttamente fino a $k>1$ dimostrando $P(k)$. Nel caso $P(k+1)$ `head` contiene tutti i caratteri esclusi gli ultimi $k+1$, mentre `tail` contiene tutti i caratteri da $k+1$ in poi. Se all'iterazione $p=k+1$ `head` e `tail` sono uguali il test di uguaglianza restituirà il periodo $p=k+1$.
+
+##### Conclusione dimostrazione
+
+Abbiamo appena dimostrato che il programma funziona correttamente sia nel _caso base_ sia nel _caso indutivo_.
 
 #### Calcolo di complessità
 
@@ -80,7 +92,11 @@ Funzione periodSmart(S: stringa):
     RESTITUISCI PeriodoFrazionario
 ```
 
-#### Calcolo di correttezza
+#### Dimostrazione di correttezza
+
+##### Caso base
+
+##### Passo induttivo
 
 #### Calcolo di complessità
 
