@@ -37,7 +37,7 @@ Il _caso base_ è quando la lunghezza del periodo è $p=1$. In questa situazione
 
 ##### Passo induttivo: $\forall p \ P(p) \Rightarrow P(p+1)$
 
-Nel caso in cui il periodo sia $p>1$ supponiamo come _ipotesi induttiva_ che il programma funzioni correttamente fino a $k>1$ dimostrando $P(k)$. Nel caso $P(k+1)$ `head` contiene tutti i caratteri esclusi gli ultimi $k+1$, mentre `tail` contiene tutti i caratteri da $k+1$ in poi. Se all'iterazione $p=k+1$ `head` e `tail` sono uguali il test di uguaglianza restituirà il periodo $p=k+1$.
+Nel caso in cui il periodo sia $p>1$ supponiamo come _ipotesi induttiva_ che il programma funzioni correttamente fino a $k>1$. Nel caso $P(k+1)$ `head` contiene tutti i caratteri esclusi gli ultimi $k+1$, mentre `tail` contiene tutti i caratteri da $k+1$ in poi. Se all'iterazione $p=k+1$ `head` e `tail` sono uguali il test di uguaglianza restituirà il periodo $p=k+1$.
 
 ##### Conclusione dimostrazione
 
@@ -94,9 +94,21 @@ Funzione periodSmart(S: stringa):
 
 #### Dimostrazione di correttezza
 
-##### Caso base
+##### Caso base $P(1)$
 
-##### Passo induttivo
+Il _caso base_ prevede che la lunghezza della stringa e del periodo sia $p=1$. In questa situazione il periodo frazionario è definito come la lunghezza della stringa meno il bordo massimo, ovvero, in questo caso, il valore dell'array in posizione `r[1]`. Il programma ritorna $1$ come periodo.
+
+##### Passo induttivo $\forall p \ P(p) \Rightarrow P(p+1)$
+
+Nel caso in cui $p>1$ supponiamo come _ipotesi induttiva_ che il programma funzioni correttamente fino a $k>1$. Se `s[i - 1]` è uguale a `s[r[i - 1]]`, allora `r[i]` viene impostato uguale a `r[i - 1] + 1`, aggiornando cosi la lunghezza del bordo.
+
+Se `s[i - 1]` è diverso da `s[r[i - 1]]`, l'algoritmo entra nel ciclo `while`. Qui, `r[i]` verrà ridotto al valore di `r[r[i - 1]]`, che rappresenta il bordo più breve.
+
+Alla fine del programma, viene calcolato il periodo frazionario come lunghezza della stringa meno lunghezza massima del bordo.
+
+##### Conclusione dimostrazione
+
+Abbiamo appena dimostrato che il programma funziona correttamente sia nel _caso base_ sia nel _caso indutivo_.
 
 #### Calcolo di complessità
 
@@ -182,7 +194,7 @@ La validità del modello è supportata dagli indici statistici, in particolare i
 
 L'evoluzione del modello Smart può essere, invece, descritta da un'equazione di primo grado:
 $$
-y_{smart} = 10679.087 +  6.607 \cdot x
+y_{smart} = 10679.087 + 6.607 \cdot x
 $$
 
 Anche in questo caso la validità del modello è supportata dagli indici statistici, in particolare il _Residual Standard Error_ indica come l'errore standard dei residui sia di circa 0,0448 millisecondi. Gli indici _Multiple R-squared_ e _Adjusted R-squared_,hanno totalizzato il valore quasi massimo di 0.9969. Infine il _p-value_ è di gran lunga inferiore alla soglia di 0.05 ($2,2 \times 10^{-16}$), il che indica un risultato statisticamente significativo.
