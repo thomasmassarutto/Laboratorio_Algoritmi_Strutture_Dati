@@ -200,3 +200,20 @@ $$
 Anche in questo caso la validità del modello è supportata dagli indici statistici, in particolare il _Residual Standard Error_ indica come l'errore standard dei residui sia di circa 0,0448 millisecondi. Gli indici _Multiple R-squared_ e _Adjusted R-squared_,hanno totalizzato il valore quasi massimo di 0.9969. Infine il _p-value_ è di gran lunga inferiore alla soglia di 0.05 ($2,2 \times 10^{-16}$), il che indica un risultato statisticamente significativo.
 
 ## Riferimenti
+
+- **Versione Java**: 1.8.0_341
+
+- **Hardware in fase di test**: 
+
+	 * OS: Windows 10 Pro 64-bit
+	 * CPU: Intel Core i5 9400F
+	 * RAM: 8,00GB Single-Channel DDR4 @ 1197MHz (17-17-17-39)
+	 * MOBO: ASUSTeK COMPUTER INC. PRIME B365M-A (LGA1151)
+
+- **Componenti gruppo**:
+
+	* Dinulescu Ioana Larisa, 157046, 157046@spes.uniud.it
+	* Massarutto Thomas, 158502, 158502@spes.uniud.it
+	* Scaini Luca, 159487, 159487@spes.uniud.it
+
+- **GitHub**: https://github.com/thomasmassarutto/Laboratorio_Algoritmi_Strutture_Dati/blob/master/progetto/src/Test.java
