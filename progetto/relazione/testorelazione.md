@@ -19,21 +19,21 @@ _PeriodNaive_ è un algoritmo di complessità $O(n^2)$ che, mediante un ciclo _f
 
 ```
 Funzione periodoNaive(Stringa):
-	Length= lunghezza(Stringa)
-	ITERA P da 1 fino Length{
-		Head= sottostringa(Stringa, 0 -> Length-P )
-		Hail= sottostringa(Stringa, P -> Length)
+    Length= lunghezza(Stringa)
+    ITERA P da 1 fino Length{
+        Head= sottostringa(Stringa, 0 -> Length-P )
+        Hail= sottostringa(Stringa, P -> Length)
 
-		SE Head è uguale a Tail:
-			RESTITUISCI P
-	}
+        SE Head è uguale a Tail:
+            RESTITUISCI P
+    }
 ```
 
 #### Dimostrazione di correttezza
 
 ##### Caso base: $P(1)$
 
-Il _caso base_ è quando la lunghezza del periodo è $p=1$. In questa situazione `head` e `tail` sono stringhe vuote, quindi il successivo test di uguaglianza risulta positivo e l'algoritmo ritorna l'indice di iterazione $1$.  
+Il _caso base_ è quando la lunghezza del periodo è $p=1$. In questa situazione `head` e `tail` sono stringhe vuote; quindi, il successivo test di uguaglianza risulta positivo e l'algoritmo ritorna l'indice di iterazione $1$.  
 
 ##### Passo induttivo: $\forall p \ P(p) \Rightarrow P(p+1)$
 
@@ -41,7 +41,7 @@ Nel caso in cui il periodo sia $p>1$ supponiamo come _ipotesi induttiva_ che il 
 
 ##### Conclusione dimostrazione
 
-Abbiamo appena dimostrato che il programma funziona correttamente sia nel _caso base_ sia nel _caso indutivo_.
+Abbiamo appena dimostrato che il programma funziona correttamente sia nel _caso base_ sia nel _caso induttivo_.
 
 #### Calcolo di complessità
 
@@ -80,8 +80,8 @@ Funzione periodSmart(S: stringa):
     R[1] = 0
     ITERA I da 2 fino a N:
         J = R[I - 1]
-        FINCHE 	J > 0,
-		        carattere in (i - 1) di S != dal carattere in posizione J di S:
+        FINCHE  J > 0,
+                carattere in (i - 1) di S != dal carattere in posizione J di S:
             J = R[J]
         SE carattere in (I - 1) di S == al carattere in J di s:
             R[I] = J + 1
@@ -100,7 +100,7 @@ Il _caso base_ prevede che la lunghezza della stringa e del periodo sia $p=1$. I
 
 ##### Passo induttivo $\forall p \ P(p) \Rightarrow P(p+1)$
 
-Nel caso in cui $p>1$ supponiamo come _ipotesi induttiva_ che il programma funzioni correttamente fino a $k>1$. Se `s[i - 1]` è uguale a `s[r[i - 1]]`, allora `r[i]` viene impostato uguale a `r[i - 1] + 1`, aggiornando cosi la lunghezza del bordo.
+Nel caso in cui $p>1$ supponiamo come _ipotesi induttiva_ che il programma funzioni correttamente fino a $p>1$. Se `s[i - 1]` è uguale a `s[r[i - 1]]`, allora `r[i]` viene impostato uguale a `r[i - 1] + 1`, aggiornando cosi la lunghezza del bordo.
 
 Se `s[i - 1]` è diverso da `s[r[i - 1]]`, l'algoritmo entra nel ciclo `while`. Qui, `r[i]` verrà ridotto al valore di `r[r[i - 1]]`, che rappresenta il bordo più breve.
 
@@ -108,7 +108,7 @@ Alla fine del programma, viene calcolato il periodo frazionario come lunghezza d
 
 ##### Conclusione dimostrazione
 
-Abbiamo appena dimostrato che il programma funziona correttamente sia nel _caso base_ sia nel _caso indutivo_.
+Abbiamo appena dimostrato che il programma funziona correttamente sia nel _caso base_ sia nel _caso induttivo_.
 
 #### Calcolo di complessità
 
@@ -159,38 +159,38 @@ Una volta calcolato il _tempo minimo misurabile_, per ricavare dati attendibili 
 
 ```
 Progetto main():
-	t_min= tempo_minimo_misurabile()
-	ITERA Run da 1 a 5{
-		ITERA Tedt da 0 a 99{
-			stringa= generatringa()
-			//testa algoritmo 1
-			iterazione= 0
-			start= now()
-			FAI{
-				algoritmo(stringa)
-				end= now()
-				iterazione++
-			}FINCHÈ (end-start< tmin)
-			tempo_medio= (end-start)/i
-			// testa algoritmo 2
-			...
-		}
-	}
+    t_min= tempo_minimo_misurabile()
+    ITERA Run da 1 a 5{
+        ITERA Tedt da 0 a 99{
+            stringa= generatringa()
+            //testa algoritmo 1
+            iterazione= 0
+            start= now()
+            FAI{
+                algoritmo(stringa)
+                end= now()
+                iterazione++
+            }FINCHÈ (end-start< tmin)
+            tempo_medio= (end-start)/i
+            // testa algoritmo 2
+            ...
+        }
+    }
 ```
 
 ### Risultati sperimentali di vari test
 
-Analizzando i grafici _Durata_ vs _Lunghezza della stringa_ si nota come, i tempi di risoluzione relativi all'algoritmo _PeriodNaive_ crescono esponenzialmente, mentre,  quelli relativi a _PeriodSmart_ hanno una crescita lineare.
+Analizzando i grafici _Durata_ vs _Lunghezza della stringa_ si nota come, i tempi di risoluzione relativi all'algoritmo _PeriodNaive_ crescono esponenzialmente, mentre, quelli relativi a _PeriodSmart_ hanno una crescita lineare.
 
-Sin dalle prime iterazioni il delta temporale fra i due algoritmi è dell'ordine di qualche millisecondo. Questa questa differenza aumenta esponenzialmente raggiungendo oltre mezzo secondo nelle iterazioni finali.
+Sin dalle prime iterazioni il delta temporale fra i due algoritmi è dell'ordine di qualche millisecondo. Questa differenza aumenta esponenzialmente raggiungendo oltre mezzo secondo nelle iterazioni finali.
 
-Basandosi sui dati raccolti, è possibile creare un modello in grado di prevedere l'andamento temporale dei due algoritmi. In particolare l'evoluzione del modello Naive può essere descritta da un'equazione di secondo grado:
+Basandosi sui dati raccolti, è possibile creare un modello in grado di prevedere l'andamento temporale dei due algoritmi. In particolare, l'evoluzione del modello Naive può essere descritta da un'equazione di secondo grado:
 
 $$
 y_{naive} = 565335.910 + 142.414 \cdot x + 0.146 \cdot x^2
 $$
 
-La validità del modello è supportata dagli indici statistici, in particolare il _Residual Standard Error_ indica come l'errore standard dei residui sia di circa 13.73 millisecondi. Gli indici _Multiple R-squared_ e _Adjusted R-squared_, atti a spiegare la variabilità dei dati,hanno totalizzato il valore massimo di 1. Infine il _p-value_ è di gran lunga inferiore alla soglia di 0.05 ($2,2 \times 10^{-16}$), il che indica un risultato statisticamente significativo. 
+La validità del modello è supportata dagli indici statistici, in particolare il _Residual Standard Error_ indica come l'errore standard dei residui sia di circa 13.73 millisecondi. Gli indici _Multiple R-squared_ e _Adjusted R-squared_, atti a spiegare la variabilità dei dati, hanno totalizzato il valore massimo di 1. Infine il _p-value_ è di gran lunga inferiore alla soglia di 0.05 ($2,2 \times 10^{-16}$), il che indica un risultato statisticamente significativo. 
 
 L'evoluzione del modello Smart può essere, invece, descritta da un'equazione di primo grado:
 $$
@@ -205,15 +205,16 @@ Anche in questo caso la validità del modello è supportata dagli indici statist
 
 - **Hardware in fase di test**: 
 
-	 * OS: Windows 10 Pro 64-bit
-	 * CPU: Intel Core i5 9400F
-	 * RAM: 8,00GB Single-Channel DDR4 @ 1197MHz (17-17-17-39)
-	 * MOBO: ASUSTeK COMPUTER INC. PRIME B365M-A (LGA1151)
+     * OS: Windows 10 Pro 64-bit
+     * CPU: Intel Core i5 9400F
+     * RAM: 8,00GB Single-Channel DDR4 @ 1197MHz (17-17-17-39)
+     * MOBO: ASUSTeK COMPUTER INC. PRIME B365M-A (LGA1151)
 
 - **Componenti gruppo**:
 
-	* Dinulescu Ioana Larisa, 157046, 157046@spes.uniud.it
-	* Massarutto Thomas, 158502, 158502@spes.uniud.it
-	* Scaini Luca, 159487, 159487@spes.uniud.it
+    * Dinulescu Ioana Larisa, 157046, 157046@spes.uniud.it
+    * Massarutto Thomas, 158502, 158502@spes.uniud.it
+    * Scaini Luca, 159487, 159487@spes.uniud.it
 
 - **GitHub**: https://github.com/thomasmassarutto/Laboratorio_Algoritmi_Strutture_Dati/blob/master/progetto/src/Test.java
+
