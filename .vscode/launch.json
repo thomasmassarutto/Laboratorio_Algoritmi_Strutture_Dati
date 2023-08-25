@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "es22",
+            "request": "launch",
+            "mainClass": "es22",
+            "projectName": "Laboratorio_Algoritmi_Strutture_Dati_5f63778"
+        },
+        {
+            "type": "java",
             "name": "Test",
             "request": "launch",
             "mainClass": "Test",
