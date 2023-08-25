@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import static java.lang.Math.max;
 
-public class Es25 {
+public class es25 {
     public static int editing(String stringa1, String stringa2){
         int n = stringa1.length();
         int m = stringa2.length();
