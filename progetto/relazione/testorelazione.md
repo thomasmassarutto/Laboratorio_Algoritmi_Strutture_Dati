@@ -47,17 +47,17 @@ Abbiamo appena dimostrato che il programma funziona correttamente sia nel _caso 
 
 | Codice                                                 | Costo  | Volte |
 | ------------------------------------------------------ | ------ | ----- |
-| `public  static  int  periodNaive(String  stringa) { ` |        |
+| `public  static  int  periodNaive(String  stringa) { ` |        |       |
 | `int  n= stringa.length();`                            | $O(1)$ | 1     |
-| `for (int  p=1; p<=n;p++){`                            |        |
+| `for (int  p=1; p<=n;p++){`                            |        |       |
 | `String  head=stringa.substring(0, n-p);`              | $O(n)$ | n     |
 | `String  tail=stringa.substring(p, n);`                | $O(n)$ | n     |
 | `if (head.equals(tail)){`                              | $O(p)$ | n     |
 | `return  p;`                                           | $O(1)$ | 1     |
-| `}`                                                    |        |
-| `}`                                                    |        |
-| `return  ERR;`                                         |        |
-| `}`                                                    |        |
+| `}`                                                    |        |       |
+| `}`                                                    |        |       |
+| `return  ERR;`                                         |        |       |
+| `}`                                                    |        |       |
 
 Dalla tabella risulta che il costo computazionale dell'algoritmo è:
 
@@ -114,24 +114,24 @@ Abbiamo appena dimostrato che il programma funziona correttamente sia nel _caso 
 
 | Codice                                              | Costo  | Volte |
 | --------------------------------------------------- | ------ | ----- |
-| `public  static  int  periodSmart(String  s) {`     |        |
+| `public  static  int  periodSmart(String  s) {`     |        |       |
 | `int  n = s.length();`                              | $O(1)$ | 1     |
 | `int[] r = new  int[n + 1];`                        | $O(1)$ | 1     |
 | `r[1] = 0;`                                         | $O(1)$ | 1     |
-| `for (int  i = 2; i <= n; i++) {`                   |        |
+| `for (int  i = 2; i <= n; i++) {`                   |        |       |
 | `int  j = r[i - 1];`                                | $O(1)$ | n     |
 | `while (j > 0 && s.charAt(i - 1) != s.charAt(j)) {` | $O(2)$ | n     |
 | `j = r[j];`                                         | $O(1)$ | n     |
-| `}`                                                 |        |
+| `}`                                                 |        |       |
 | `if (s.charAt(i - 1) == s.charAt(j)) {`             | $O(1)$ | n     |
 | `r[i] = j + 1;`                                     | $O(1)$ | n     |
-| `} else {`                                          |        |
+| `} else {`                                          |        |       |
 | `r[i] = 0;`                                         | $O(1)$ | n     |
-| `}}`                                                |        |
+| `}}`                                                |        |       |
 | `int  maxBordo = r[n];`                             | $O(1)$ | 1     |
 | `int  periodoFrazionario = n - maxBordo;`           | $O(1)$ | 1     |
 | `return  periodoFrazionario;`                       | $O(1)$ | 1     |
-| `}`                                                 |        |
+| `}`                                                 |        |       |
 
 Dalla tabella risulta che il costo computazionale dell'algoritmo è:
 
