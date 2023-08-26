@@ -75,7 +75,6 @@ average <-function(algo){
   return (average_duration_by_length)
 }
 #####
-
 ```
 
 ```{r 6runs , echo=FALSE}
