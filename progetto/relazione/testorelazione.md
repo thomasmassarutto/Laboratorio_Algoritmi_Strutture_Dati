@@ -137,7 +137,8 @@ Dalla tabella risulta che il costo computazionale dell'algoritmo è:
 
 $$
 \begin {aligned}
-Costo &= O(1) + O(1) + O(1) + O(1) \cdot n + O(2) \cdot n + O(1) \cdot n + O(1) \cdot n + O(1) \cdot n + O(1) \cdot n  + O(1) + O(1) + O(1) \\
+Costo &= O(1) + O(1) + O(1) + O(1) \cdot n + O(2) \cdot n + O(1) \cdot n +\\ 
+ &+ O(1) \cdot n + O(1) \cdot n + O(1) \cdot n  + O(1) + O(1) + O(1) \\
  &= 6 \cdot O(1) + n \cdot O(1) + O(2)\\
  &\simeq O(n)
  \end {aligned}
@@ -182,11 +183,11 @@ Progetto main():
 
 Analizzando i grafici _Durata_ vs _Lunghezza della stringa_ si nota come, i tempi di risoluzione relativi all'algoritmo _PeriodNaive_ crescono esponenzialmente, mentre, quelli relativi a _PeriodSmart_ hanno una crescita lineare.
 
-![tutte le run](plot/Durata_vs_Lunghezza_della_stringa_6_run.png)
+![6 run di raccolta dati](plot/Durata_vs_Lunghezza_della_stringa_6_run.png)
 
 Sin dalle prime iterazioni il delta temporale fra i due algoritmi è dell'ordine di qualche millisecondo. Questa differenza aumenta esponenzialmente raggiungendo oltre mezzo secondo nelle iterazioni finali.
 
-![avg run](<plot/Durata_vs_Lunghezza_della_stringa_(scala_logaritmica).png>)
+![Media dei tempi per ogni stringa nelle run](<plot/Durata_vs_Lunghezza_della_stringa_(scala_logaritmica).png>)
 
 Basandosi sui dati raccolti, è possibile creare un modello in grado di prevedere l'andamento temporale dei due algoritmi. In particolare, l'evoluzione del modello Naive può essere descritta da un'equazione di secondo grado:
 
