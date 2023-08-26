@@ -1,215 +1,212 @@
-
 import java.util.Scanner;
-
-class AVLNode {
-    int key;
-    int height;
-    String val;
-    AVLNode left;
-    AVLNode right;
-
-    AVLNode(int k, String v) {
-        key = k;
-        height = 1;
-        val = v;
-        left = null;
-        right = null;
-    }
-}
-
 public class es22 {
+        static class Node {
+        int key;
+        int height;
+        String val;
+        Node left;
+        Node right;
+
+        public Node(int key, String val) {
+            this.key = key;
+            this.height = 1;
+            this.val = val;
+            this.left = null;
+            this.right = null;
+        }
+    }
+   
+    public static Node minValueNode(Node node) {
+        Node current = node;
+        while (current.left != null) {
+            current = current.left;
+        }
+        return current;
+    }
+
+    public static Node delete(Node root, int key) {
+        if (root == null) {
+            return root;
+        }
+    
+        if (key < root.key) {
+            root.left = delete(root.left, key);
+        } else if (key > root.key) {
+            root.right = delete(root.right, key);
+        } else {
+            if (root.left == null || root.right == null) {
+                Node temp = (root.left != null) ? root.left : root.right;
+    
+                if (temp == null) {
+                    temp = root;
+                    root = null;
+                } else {
+                    root = temp;
+                }
+            } else {
+                Node temp = minValueNode(root.right);
+                root.key = temp.key;
+                root.val = temp.val; // Update val here
+                root.right = delete(root.right, temp.key);
+            }
+        }
+    
+        if (root == null) {
+            return root;
+        }
+    
+        root.height = 1 + Math.max(height(root.left), height(root.right));
+        int balance = getBalance(root);
+    
+        if (balance > 1 && getBalance(root.left) >= 0) {
+            return rotateRight(root);
+        }
+        if (balance > 1 && getBalance(root.left) < 0) {
+            root.left = rotateLeft(root.left);
+            return rotateRight(root);
+        }
+        if (balance < -1 && getBalance(root.right) <= 0) {
+            return rotateLeft(root);
+        }
+        if (balance < -1 && getBalance(root.right) > 0) {
+            root.right = rotateRight(root.right);
+            return rotateLeft(root);
+        }
+    
+        return root;
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        AVLNode root = null;
+        Node root = null;
 
         while (true) {
-            String input = scanner.nextLine();
-            String[] tokens = input.split(" ");
-            String command = tokens[0];
+            String line = scanner.nextLine();
+            String[] parts = line.split(" ");
+            String command = parts[0];
 
-            switch (command) {
-                case "insert":
-                    int key = Integer.parseInt(tokens[1]);
-                    String value = tokens[2];
-                    root = insertAVL(root, key, value);
-                    break;
-                case "remove":
-                    int removeKey = Integer.parseInt(tokens[1]);
-                    root = delete(root, removeKey);
-                    break;
-                case "find":
-                    int findKey = Integer.parseInt(tokens[1]);
-                    search(root, findKey);
-                    break;
-                case "clear":
-                    root = null;
-                    break;
-                case "show":
-                    printPreOrder(root);
-                    System.out.println();
-                    break;
-                default:
-                    scanner.close();
-                    return;
+            if (command.equals("insert")) {
+                int key = Integer.parseInt(parts[1]);
+                String value = parts[2];
+                root = insert(root, key, value);
+            } 
+            else if(command.equals ("remove")){
+                int keyToRemove = Integer.parseInt(parts[1]);
+                root = delete(root, keyToRemove);
+                
+            }
+            
+            else if (command.equals("show")) {
+                printTree(root);
+            } else if (command.equals("exit")) {
+                break;
+            }
+            else if (command.equals("find")) {
+                int keyToFind = Integer.parseInt(parts[1]);
+                search(root, keyToFind);
+                break;
             }
         }
+
+        scanner.close();
     }
 
-    static AVLNode insertAVL(AVLNode node, int key, String value) {
+    public static Node insert(Node node, int key, String value) {
         if (node == null) {
-            return new AVLNode(key, value);
+            return new Node(key, value);
+        }
+
+        if (key < node.key) {
+            node.left = insert(node.left, key, value);
+        } else if (key > node.key) {
+            node.right = insert(node.right, key, value);
         } else {
-            if (node.key > key) {
-                node.left = insertAVL(node.left, key, value);
-            } else {
-                node.right = insertAVL(node.right, key, value);
-            }
-            node = updateHeight(node);
-            node = balance(node);
-            return node;
+            return node; 
         }
-    }
 
-    static AVLNode rotateLeft(AVLNode x) {
-        AVLNode t = x.right;
-        x.right = t.left;
-        x = updateHeight(x);
-        t.left = x;
-        t = updateHeight(t);
-        return t;
-    }
+        node.height = 1 + Math.max(height(node.left), height(node.right));
 
-    static AVLNode rotateRight(AVLNode x) {
-        AVLNode t = x.left;
-        x.left = t.right;
-        x = updateHeight(x);
-        t.right = x;
-        t = updateHeight(t);
-        return t;
-    }
+        int balance = getBalance(node);
 
-    static AVLNode rotateLeftRight(AVLNode x) {
-        x.left = rotateLeft(x.left);
-        return rotateRight(x);
-    }
-
-    static AVLNode rotateRightLeft(AVLNode x) {
-        x.right = rotateRight(x.right);
-        return rotateLeft(x);
-    }
-
-    static void deleteTree(AVLNode tree) {
-        if (tree != null) {
-            deleteTree(tree.left);
-            deleteTree(tree.right);
-        }
-    }
-
-    static void printPreOrder(AVLNode node) {
-        if (node != null) {
-            System.out.print(node.key + ":" + node.val + ":" + node.height + " ");
-            printPreOrder(node.left);
-            printPreOrder(node.right);
-        } else {
-            System.out.print("NULL ");
-        }
-    }
-
-    static void search(AVLNode node, int key) {
-        if (node != null) {
-            if (node.key == key) {
-                System.out.println(node.val);
-            } else if (node.key > key) {
-                search(node.left, key);
+        if (balance > 1) {
+            if (key < node.left.key) {
+                return rotateRight(node);
             } else {
-                search(node.right, key);
-            }
-        }
-    }
-
-    static AVLNode delete(AVLNode node, int key) {
-        if (node == null) {
-            return null;
-        }
-        if (node.key == key) {
-            if (node.left == null && node.right == null) {
-                return null;
-            } else if (node.right == null) {
-                return node.left;
-            } else if (node.left == null) {
-                return node.right;
-            } else {
-                AVLNode[] p = new AVLNode[1];
-                node.right = extractSuccessor(node.right, p);
-                p[0].left = node.left;
-                p[0].right = node.right;
-                p[0] = updateHeight(p[0]);
-                p[0] = balance(p[0]);
-                return p[0];
-            }
-        } else {
-            if (node.key > key) {
-                node.left = delete(node.left, key);
-                node = updateHeight(node);
-                node = balance(node);
-            } else {
-                node.right = delete(node.right, key);
-                node = updateHeight(node);
-                node = balance(node);
-            }
-            return node;
-        }
-    }
-    
-    static AVLNode extractSuccessor(AVLNode node, AVLNode[] successor) {
-        if (node.left != null) {
-            if (node.left.left != null) {
-                node.left = extractSuccessor(node.left, successor);
-                node = updateHeight(node);
-                node = balance(node);
-                return node;
-            } else {
-                successor[0] = node.left;
-                node.left = node.left.right;
-                node = updateHeight(node);
-                node = balance(node);
-                return node;
-            }
-        } else {
-            successor[0] = node;
-            return node.right;
-        }
-    }
-
-    static AVLNode updateHeight(AVLNode node) {
-        int hl = (node.left != null) ? node.left.height : 0;
-        int hr = (node.right != null) ? node.right.height : 0;
-        node.height = 1 + Math.max(hl, hr);
-        return node;
-    }
-
-    static int getBalanceFactor(AVLNode node) {
-        int hl = (node.left != null) ? node.left.height : 0;
-        int hr = (node.right != null) ? node.right.height : 0;
-        return hr - hl;
-    }
-
-    static AVLNode balance(AVLNode node) {
-        int balanceFactor = getBalanceFactor(node);
-        
-        if (balanceFactor > 1) { // Right heavy
-            if (getBalanceFactor(node.right) < 0) {
-                return rotateRightLeft(node);
-            } else {
-                return rotateLeft(node);
-            }
-        } else if (balanceFactor < -1) { // Left heavy
-            if (getBalanceFactor(node.left) > 0) {
-                return rotateLeftRight(node);
-            } else {
+                node.left = rotateLeft(node.left);
                 return rotateRight(node);
             }
         }
+        if (balance < -1) {
+            if (key > node.right.key) {
+                return rotateLeft(node);
+            } else {
+                node.right = rotateRight(node.right);
+                return rotateLeft(node);
+            }
+        }
+
         return node;
+    }
+
+    static void search(Node n, int key) {
+        if (n != null) {
+            if (n.key == key) {
+                System.out.println(n.val);
+            } else if (n.key > key) {
+                search(n.left, key);
+            } else {
+                search(n.right, key);
+            }
+        }
+    }
+
+    public static int height(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return node.height;
+    }
+
+    public static int getBalance(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return height(node.left) - height(node.right);
+    }
+
+    public static Node rotateRight(Node y) {
+        Node x = y.left;
+        Node T2 = x.right;
+
+        x.right = y;
+        y.left = T2;
+
+        y.height = 1 + Math.max(height(y.left), height(y.right));
+        x.height = 1 + Math.max(height(x.left), height(x.right));
+
+        return x;
+    }
+
+    public static Node rotateLeft(Node x) {
+        Node y = x.right;
+        Node T2 = y.left;
+
+        y.left = x;
+        x.right = T2;
+
+        x.height = 1 + Math.max(height(x.left), height(x.right));
+        y.height = 1 + Math.max(height(y.left), height(y.right));
+
+        return y;
+    }
+
+    public static void printTree(Node node) {
+        if (node != null) {
+            System.out.println(node.key + ":" + node.val + ":" + node.height);
+            printTree(node.left);
+            printTree(node.right);
+        } else {
+            System.out.println("NULL");
+        }
     }
 }

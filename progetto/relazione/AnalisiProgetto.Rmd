@@ -23,6 +23,7 @@ library(ggplot2)
 library(dplyr)
 library(grid)
 library(gridExtra)
+library(scales)
 results <-read.csv("results.csv")
 
 ## plotta una singola run 
@@ -41,11 +42,14 @@ smallPlotRun<-function(idRun){
     scale_color_manual(values = c("naive" = "red", 
                                   "smart" = "blue")) +
     
-    scale_y_continuous(labels = scales::label_number(scale = 1e-6, suffix = "M"),
-                       name = "Nanosecondi") +
+  scale_y_continuous(
+    labels = scientific_format(),  # Imposta i label in notazione esponenziale
+ 
+  ) +
+  scale_x_continuous(
+    labels = scientific_format(),  # Imposta i label in notazione esponenziale
     
-    scale_x_continuous(labels = scales::label_number(scale = 1e-3, suffix = "K"),
-                       name = "Lunghezza stringa") +
+  )+
     
     theme(legend.position="none")
   
@@ -84,9 +88,6 @@ run3<- smallPlotRun(3)
 run4<- smallPlotRun(4)
 run5<- smallPlotRun(5)
 run6<- smallPlotRun(6)
-
-
-
 
 grid.arrange(run1, run2, run3, run4, run5, run6, 
              ncol = 2, nrow = 3, 
@@ -129,9 +130,19 @@ ggplot(average_results,
   scale_color_manual(values = c("naive" = "red", 
                                 "smart" = "blue")) +
   
-  scale_x_log10() +  # Scala logaritmica sull'asse x
-  scale_y_log10() +  # Scala logaritmica sull'asse y
+  #scale_x_log10() +  # Scala logaritmica sull'asse x
+  #scale_y_log10() +  # Scala logaritmica sull'asse y
   
+  scale_y_continuous(
+    labels = scientific_format(),  # Imposta i label in notazione esponenziale
+    trans = 'log10'  # Imposta la scala logaritmica
+  ) +
+  
+  scale_x_continuous(
+    labels = scientific_format(),  # Imposta i label in notazione esponenziale
+    trans = 'log10'  # Imposta la scala logaritmica
+  )
+
   labs(title = "Durata vs Lunghezza della stringa (scala logaritmica)",
        x= "Lunghezza della stringa (caratteri)",
        y="Durata (nanosecondi)",
@@ -157,6 +168,13 @@ stat_smooth( method = "lm",
              se=TRUE, fill=NA,
               colour="black"
              )+
+  
+    scale_y_continuous(
+    labels = scientific_format(),  # Imposta i label in notazione esponenziale
+  ) +
+  scale_x_continuous(
+    labels = scientific_format(),  # Imposta i label in notazione esponenziale
+  )+
 
   labs(title = "Modello previsione algoritmo Naive",
        x= "Lunghezza della stringa",
@@ -179,7 +197,16 @@ ggplot(smart,
   
   geom_point(color='blue') +
   
-  geom_smooth(method = "lm",formula = "y ~ x", se = FALSE, color = "black") + 
+  geom_smooth(method = "lm",formula = "y ~ x", se = FALSE, color = "black") +
+  
+    scale_y_continuous(
+    labels = scientific_format(),  # Imposta i label in notazione esponenziale
+
+  ) +
+  scale_x_continuous(
+    labels = scientific_format(),  # Imposta i label in notazione esponenziale
+
+  )+
   
   labs(title = "Modello previsione algoritmo Smart",
        x= "Lunghezza della stringa",
