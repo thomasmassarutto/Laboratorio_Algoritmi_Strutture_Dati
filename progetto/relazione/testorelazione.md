@@ -182,11 +182,11 @@ Progetto main():
 
 Analizzando i grafici _Durata_ vs _Lunghezza della stringa_ si nota come, i tempi di risoluzione relativi all'algoritmo _PeriodNaive_ crescono esponenzialmente, mentre, quelli relativi a _PeriodSmart_ hanno una crescita lineare.
 
-![run totali](plot/Durata_vs_Lunghezza_della_stringa_6_run.png)
+![tutte le run](plot/Durata_vs_Lunghezza_della_stringa_6_run.png)
 
 Sin dalle prime iterazioni il delta temporale fra i due algoritmi è dell'ordine di qualche millisecondo. Questa differenza aumenta esponenzialmente raggiungendo oltre mezzo secondo nelle iterazioni finali.
 
-![run in media](<plot/Durata_vs_Lunghezza_della_stringa_(scala_logaritmica).png>)
+![avg run](<plot/Durata_vs_Lunghezza_della_stringa_(scala_logaritmica).png>)
 
 Basandosi sui dati raccolti, è possibile creare un modello in grado di prevedere l'andamento temporale dei due algoritmi. In particolare, l'evoluzione del modello Naive può essere descritta da un'equazione di secondo grado:
 
@@ -226,5 +226,3 @@ Anche in questo caso la validità del modello è supportata dagli indici statist
   - Scaini Luca, 159487, 159487@spes.uniud.it
 
 - **GitHub**: https://github.com/thomasmassarutto/Laboratorio_Algoritmi_Strutture_Dati/blob/master/progetto/src/Test.java
-
-@LarisaDinulescu

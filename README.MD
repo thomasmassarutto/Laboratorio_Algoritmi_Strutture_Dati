@@ -25,3 +25,5 @@ Si richiede di implementare inoltre un programma per la misurazione dei tempi me
 own_branch -> pre -> master
 - **pre**: contiene anche errori
 - **master**: non contiene errori (si spera)
+
+@github/LarisaDinulescu
