@@ -226,4 +226,4 @@ Anche in questo caso la validità del modello è supportata dagli indici statist
   - Massarutto Thomas, 158502, 158502@spes.uniud.it
   - Scaini Luca, 159487, 159487@spes.uniud.it
 
-- **GitHub**: https://github.com/thomasmassarutto/Laboratorio_Algoritmi_Strutture_Dati/blob/master/progetto/src/Test.java
+- **GitHub**: https://github.com/thomasmassarutto/Laboratorio_Algoritmi_Strutture_Dati
