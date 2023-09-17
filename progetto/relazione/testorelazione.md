@@ -2,7 +2,7 @@
 
 ## Scopo del progetto
 
-Lo scopo di questo progetto è implementare due algoritmi per il calcolo del _periodo frazionario minimo_ di una stringa e misurarne i tempi medi di esecuzione. Per _periodo frazionario minimo_ si intende, data una stringa _S_, la lunghezza (_p_) della sottostringa più breve che può essere ripetuta in modo da formare la stringa _S_. Deve quindi soddisfare la seguente proprietà:
+Lo scopo di questo progetto è implementare due algoritmi per il calcolo del _periodo frazionario minimo_ di una stringa e misurarne i tempi medi di esecuzione. Per _periodo frazionario minimo_ si intende, data una stringa _S_, la lunghezza (_p_) della sotto-stringa più breve che può essere ripetuta in modo da formare la stringa _S_. Deve quindi soddisfare la seguente proprietà:
 
 $$s(i)=s(i+p) \quad \forall i= 1, \dots , n-p$$
 
@@ -21,8 +21,8 @@ _PeriodNaive_ è un algoritmo di complessità $O(n^2)$ che, mediante un ciclo _f
 Funzione periodoNaive(Stringa):
     Length= lunghezza(Stringa)
     ITERA P da 1 fino Length{
-        Head= sottostringa(Stringa, 0 -> Length-P )
-        Hail= sottostringa(Stringa, P -> Length)
+        Head= sotto-stringa(Stringa, 0 -> Length-P )
+        Hail= sotto-stringa(Stringa, P -> Length)
 
         SE Head è uguale a Tail:
             RESTITUISCI P
@@ -71,7 +71,7 @@ $$
 
 ### PeriodSmart
 
-_PeriodSmart_ è un algoritmo di complessità $O(n)$ che utilizza il concetto di _bordo_ per calcolare la lunghezza del _periodo frazionario minimo_. Genera un _array_ per memorizzare la lunghezza dei bordi delle sottostringhe (`r[i]` è il bordo della sottostringa che termina in posizione `i - 1`) e poi _itera_ sulla stringa cercando per ogni carattere un bordo fra i caratteri precedenti. Se il carattere corrente coincide col bordo, incrementa la lunghezza del bordo, altrimenti la riduce cercando un bordo più corto. Il periodo frazionario minimo è dato dalla lunghezza della stringa meno la lunghezza massima del bordo.
+_PeriodSmart_ è un algoritmo di complessità $O(n)$ che utilizza il concetto di _bordo_ per calcolare la lunghezza del _periodo frazionario minimo_. Genera un _array_ per memorizzare la lunghezza dei bordi delle sotto-stringhe (`r[i]` è il bordo della sotto-stringa che termina in posizione `i - 1`) e poi _itera_ sulla stringa cercando per ogni carattere un bordo fra i caratteri precedenti. Se il carattere corrente coincide col bordo, incrementa la lunghezza del bordo, altrimenti la riduce cercando un bordo più corto. Il periodo frazionario minimo è dato dalla lunghezza della stringa meno la lunghezza massima del bordo.
 
 ```
 Funzione periodSmart(S: stringa):
@@ -92,7 +92,7 @@ Funzione periodSmart(S: stringa):
     RESTITUISCI PeriodoFrazionario
 ```
 
-#### Dimostrazione di correttezza
+#### Dimostrazione di correttezza (parzialmente corretta)
 
 ##### Caso base $P(1)$
 
@@ -163,7 +163,7 @@ Progetto main():
     t_min= tempo_minimo_misurabile()
     ITERA Run da 1 a 5{
         ITERA Test da 0 a 99{
-            stringa= generatringa()
+            stringa= generaStringa()
             //testa algoritmo 1
             iterazione= 0
             start= now()
@@ -171,7 +171,7 @@ Progetto main():
                 algoritmo(stringa)
                 end= now()
                 iterazione++
-            }FINCHÈ (end-start< tmin)
+            }FINCHÉ (end-start< tMin)
             tempo_medio= (end-start)/i
             // testa algoritmo 2
             ...
@@ -218,7 +218,7 @@ Anche in questo caso la validità del modello è supportata dagli indici statist
   - OS: Windows 10 Pro 64-bit
   - CPU: Intel Core i5 9400F
   - RAM: 8,00GB Single-Channel DDR4 @ 1197MHz (17-17-17-39)
-  - MOBO: ASUSTeK COMPUTER INC. PRIME B365M-A
+  - MOBO: ASUSTEK COMPUTER INC. PRIME B365M-A
 
 - **Componenti gruppo**:
 
